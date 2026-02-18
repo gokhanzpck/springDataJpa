@@ -5,8 +5,12 @@ import java.util.List;
 import com.example.dto.DtoStudent;
 import com.example.dto.DtoStudentIU;
 import com.example.entities.Student;
+import jakarta.validation.constraints.NotEmpty;
 
 public interface IStudentServices {
+
+
+
 	public DtoStudent saveStudent(DtoStudentIU student);
   
 	 public List<DtoStudent> getAllStudents();

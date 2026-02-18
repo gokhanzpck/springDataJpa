@@ -1,5 +1,10 @@
 package com.example.dto;
 
+import jakarta.persistence.MapKeyClass;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +20,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 
 public class DtoStudentIU {
+    @NotEmpty(message = "Bu alan boş bırakılamaz.")
+    @Min(value = 3)
+    @Max(value = 10)
     private String firstName;
+
+    @Size(min = 5,max = 10)
     private String lastName;
+
     private LocalDate birthOfDate;
 }

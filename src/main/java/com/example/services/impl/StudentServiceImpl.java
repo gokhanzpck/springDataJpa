@@ -30,7 +30,8 @@ public class StudentServiceImpl implements IStudentServices{
 			BeanUtils.copyProperties(dtoStudentIU,student); //dtoStudentIU içindeki aynı isimli alanları👉 student nesnesine kopyalar.
 		 Student dbStudent=studentRepository.save(student);
 		 BeanUtils.copyProperties(dbStudent,response);
-		 //database sadece entity tipinde veri tipini kabul ettigi için dto olarak aldıgımız veriyi entity e cevirip kaydediyoruz .
+		 //database sadece entity tipinde veri tipini kabul ettigi için dto olarak aldıgımız veriyi entity e cevirip kaydediyoruz .SONRASINDA GÜVENLİK İÇİN DTOSTUDENYIU OLARAK GERİ DÖNDÜRÜYORUZ .
+
 		return  response;
 		}
 
