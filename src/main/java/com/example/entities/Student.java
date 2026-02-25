@@ -1,15 +1,11 @@
 package com.example.entities;
 
 import java.sql.Date;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -42,6 +38,12 @@ public class Student {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Column(name = "birth_of_date",nullable = true)
 	private Date birthOfDate;
-	
-	
+
+	@ManyToMany
+	@JoinTable(name = "student_course",
+	joinColumns = @JoinColumn(name = "student_id"),//burası ait oldugu tabloyu temsil ediyoır
+	inverseJoinColumns = @JoinColumn(name = "course_id"))//burası ıse baglı oldugu tabloyu temsil ediyor
+
+	private List<Course> courses;
+
 }

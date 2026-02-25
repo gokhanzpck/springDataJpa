@@ -5,8 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import com.example.dto.DtoCourse;
 import com.example.dto.DtoStudent;
 import com.example.dto.DtoStudentIU;
+import com.example.entities.Course;
 import org.hibernate.sql.Update;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,15 +51,25 @@ public class StudentServiceImpl implements IStudentServices{
 		}
 		 @Override
 		public DtoStudent getStudentById(Integer id) {
-			DtoStudent dto=new DtoStudent();
+			DtoStudent dtoStudent=new DtoStudent();
+
 		Optional<Student> optional= studentRepository.findById(id);
-		//optional bu deger oladabilir olmayadabilir için kullanılır 
-		if (optional.isPresent()) {
-			//ispresent içinde deger varmı true dönerse var  
+		//optional bu deger oladabilir olmayadabilir için kullanılır
+		if (optional.isEmpty()) {
+			return  null;
+		}	//ispresent içinde deger varmı true dönerse var
 			Student dbStudent=optional.get();
-			BeanUtils.copyProperties(dbStudent,dto);
-		}
-		return null;
+			BeanUtils.copyProperties(dbStudent,dtoStudent);
+
+			if (dbStudent.getCourses()!=null && !dbStudent.getCourses().isEmpty()){
+				for (Course course : dbStudent.getCourses()){
+					DtoCourse dtoCourse =new DtoCourse();
+					BeanUtils.copyProperties(course,dtoCourse);
+					dtoStudent.getCourses().add(dtoCourse);
+				}
+			}
+
+			 return dtoStudent;
 		}
 
 		@Override
