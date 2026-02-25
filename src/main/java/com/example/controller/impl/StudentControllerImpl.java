@@ -33,7 +33,7 @@ public class StudentControllerImpl implements IStudentController{
 	
 	@Override
 	@PostMapping(path = "/save")
-	public DtoStudent saveStudent(@RequestBody @Valid DtoStudentIU dtoStudentIU) {
+	public DtoStudent saveStudent(@RequestBody DtoStudentIU dtoStudentIU) {
 		//REQUESTBODY=HTTP isteğinin body kısmındaki JSON verisini al, Student nesnesine dönüştür
 		return studentServices.saveStudent(dtoStudentIU);
 	}
